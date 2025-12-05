@@ -1,0 +1,102 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f6f6f6;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.invoice-container {
+    width: 100%;
+    max-width: 750px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+
+/* Header */
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-section h1 {
+    font-size: 22px;
+    margin: 0;
+}
+
+.diamond {
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #00bfff, #7f00ff);
+    transform: rotate(45deg);
+    border-radius: 3px;
+}
+
+/* Bill to */
+.bill-to {
+    margin-top: 25px;
+}
+.bill-to h2 {
+    margin-bottom: 4px;
+}
+
+/* Table */
+.item-table {
+    margin-top: 25px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #efefef;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.summary {
+    margin-top: 25px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.summary-box {
+    width: 250px;
+    padding: 15px;
+    background: #fafafa;
+    border-radius: 10px;
+}
+
+.summary-box p {
+    margin: 6px 0;
+}
+
+.summary-box .grand {
+    font-size: 18px;
+    border-top: 1px solid #ccc;
+    padding-top: 8px;
+}
+
+/* Footer */
+.invoice-footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 13px;
+    color: #555;
+}
