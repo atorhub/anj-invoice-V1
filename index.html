@@ -1,57 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANJ Expense AI - Premium</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ANJ Invoice V3 — BlackGold Pro</title>
 
-    <link rel="stylesheet" href="style.css">
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
 
-    <!-- PDF.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <!-- Libraries -->
+  <!-- pdf.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
-    <!-- Tesseract OCR -->
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+  <!-- Tesseract (OCR) -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
 
-    <!-- html2canvas + jsPDF for invoice PDF export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- html2canvas + jsPDF for PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+  <!-- Chart.js for analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+
+  <meta name="theme-color" content="#0f0f10">
 </head>
-
 <body>
-    <header class="header">
-        <h1>ANJ Expense AI</h1>
-        <p class="tagline">Smart. Fast. AI-Powered.</p>
-    </header>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo-geom"></div>
+      <div>
+        <h1>ANJ Invoice</h1>
+        <div class="tag">AI • History • Analytics • Black & Gold</div>
+      </div>
+    </div>
 
-    <main class="card">
+    <div class="top-actions">
+      <button class="btn small gold" id="exportAllBtn">Export All (JSON)</button>
+      <button class="btn small ghost" id="clearAllBtn">Clear History</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel left">
+      <div class="card upload">
         <h2>Upload Bill / Invoice</h2>
-        <input type="file" id="fileInput" accept="image/*,application/pdf">
-
-        <button id="extractBtn">Extract Details</button>
-
-        <hr>
-
-        <h2>Extracted Information</h2>
-
-        <div class="result-box">
-            <p><strong>Date:</strong> <span id="dateOut">-</span></p>
-            <p><strong>Total:</strong> ₹<span id="totalOut">0</span></p>
-            <p><strong>Merchant:</strong> <span id="merchantOut">-</span></p>
-            <p><strong>Category:</strong> <span id="categoryOut">-</span></p>
+        <input id="fileInput" type="file" accept="application/pdf,image/*,.txt"/>
+        <div class="hint">Supported: PDF, PNG, JPG, TXT</div>
+        <div class="actions-row">
+          <button id="parseBtn" class="btn gold">Parse Bill</button>
+          <button id="ocrBtn" class="btn ghost">OCR (image)</button>
         </div>
+      </div>
 
-        <button id="saveBtn">Save to History</button>
-        <button id="downloadInvoice">Download PDF</button>
-        <button id="printInvoice">Print</button>
+      <div id="parsedCard" class="card hidden">
+        <h2>Parsed Results</h2>
+        <div id="metaBlock" class="metaBlock"></div>
 
-        <hr>
+        <div id="itemsBlock" class="itemsBlock"></div>
 
-        <h2>History</h2>
-        <div id="historyList"></div>
-    </main>
+        <div class="actions-row">
+          <button id="generateBtn" class="btn gold">Generate Invoice (A1 • BlackGold)</button>
+          <button id="saveBtn" class="btn">Save to History</button>
+        </div>
+      </div>
 
-    <script src="script.js"></script>
+      <div id="invoiceCard" class="card hidden">
+        <h2>Generated Invoice</h2>
+        <div id="invoiceArea" class="invoiceArea"></div>
+
+        <div class="actions-row">
+          <button id="downloadPDFBtn" class="btn gold">Download PDF</button>
+          <button id="printBtn" class="btn">Print</button>
+          <button id="regenerateBtn" class="btn ghost">Regenerate</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel right">
+      <div class="card history">
+        <h3>History</h3>
+        <div id="historyList" class="historyList">
+          <div class="muted">No saved bills yet.</div>
+        </div>
+      </div>
+
+      <div class="card analytics">
+        <h3>Analytics</h3>
+        <canvas id="categoryChart" height="200"></canvas>
+        <canvas id="monthlyChart" height="200" style="margin-top:14px;"></canvas>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    ANJ Creator Hub © 2025 • Invoice V3 (BlackGold Pro)
+  </footer>
+
+  <!-- App script -->
+  <script src="script.js"></script>
 </body>
-</html>
+      </html>
+      
