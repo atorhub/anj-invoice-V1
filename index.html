@@ -1,64 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ANJ Invoice V1</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ANJ Invoice V2 — History & Smart Parser</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Required libs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
 </head>
 
 <body>
-
-    <header class="header">
-        <h1>ANJ Invoice V1</h1>
-        <p>Smart Bill Parser + Auto Invoice Generator</p>
-    </header>
-
-    <section class="container">
-
-        <!-- Upload Section -->
-        <div class="card">
-            <h2>Upload Your Bill</h2>
-
-            <input type="file" id="fileInput" />
-
-            <button class="btn" onclick="processFile()">Parse Bill</button>
-            <p class="note">Supported: PDF, JPG, PNG, TXT</p>
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="diamond"></span>
+        <div>
+          <h1>ANJ Invoice</h1>
+          <div class="muted">Smart Bill Parser • History • Black & Gold</div>
         </div>
+      </div>
 
-        <!-- Parsed Output -->
-        <div id="parsedData" class="card hidden">
-            <h2>Parsed Invoice Details</h2>
-            <pre id="parsedOutput"></pre>
+      <div class="controls">
+        <button class="btn small" onclick="exportAllJSON()">Export All (JSON)</button>
+        <button class="btn small ghost" onclick="clearHistoryConfirm()">Clear History</button>
+      </div>
+    </div>
+  </header>
 
-            <button class="btn" onclick="generateInvoice()">Generate Invoice (A1 • Diamond)</button>
+  <main class="layout">
+    <section class="left">
+      <div class="card upload-card">
+        <h2>Upload & Parse</h2>
+        <input id="fileInput" type="file" accept=".pdf,image/*,.txt" />
+        <label class="muted small">Supported: PDF, JPG, PNG, TXT</label>
+        <button class="btn" onclick="processFile()">Parse Bill</button>
+      </div>
+
+      <div id="parsedCard" class="card hidden">
+        <h2>Parsed Invoice (Preview)</h2>
+        <div id="parsedMeta" class="metaBlock"></div>
+        <pre id="parsedOutput" class="previewText"></pre>
+
+        <div class="actions-row">
+          <button class="btn" onclick="generateInvoice()">Generate Invoice (A1 • BlackGold)</button>
+          <button class="btn ghost" onclick="saveCurrent()">Save to History</button>
         </div>
+      </div>
 
-        <!-- Final Invoice Display -->
-        <div id="finalInvoice" class="card hidden">
-            <h2>Generated Invoice (A1 • Diamond)</h2>
-            <div id="invoiceArea"></div>
-
-            <button class="btn" onclick="window.print()">Download / Print Invoice</button>
+      <div id="invoiceCard" class="card hidden">
+        <h2>Generated Invoice</h2>
+        <div id="invoiceArea"></div>
+        <div class="actions-row">
+          <button class="btn" onclick="downloadInvoicePDF()">Download / Print</button>
+          <button class="btn ghost" onclick="saveCurrent(true)">Save (with invoice)</button>
         </div>
-
+      </div>
     </section>
 
-    <footer class="footer">
-        ANJ Creator Hub © 2025 • Invoice Generator V1
-    </footer>
+    <aside class="right">
+      <div class="card">
+        <h3>History</h3>
+        <div id="historyList" class="historyList">
+          <div class="muted small">No saved bills yet.</div>
+        </div>
+      </div>
 
-    <!-- 🔥 Required Libraries (These were missing earlier) -->
+      <div class="card">
+        <h3>Info</h3>
+        <p class="small muted">Saved items stored locally in your browser (IndexedDB). Works offline. You can export JSON for backups.</p>
+      </div>
+    </aside>
+  </main>
 
-    <!-- PDF.js → for reading PDF bills -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+  <footer class="footer">ANJ Creator Hub © 2025 • Invoice V2</footer>
 
-    <!-- Tesseract OCR → for reading images (JPG/PNG) -->
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
-
-    <!-- Your main JS -->
-    <script src="script.js"></script>
-
+  <!-- App script -->
+  <script src="script.js"></script>
 </body>
 </html>
