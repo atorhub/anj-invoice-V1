@@ -1,52 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANJ Invoice Parser & Generator</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <!-- PDF libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-    <!-- OCR (Tesseract.js) -->
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ANJ Invoice V1</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
-    
 
 <body>
 
-    <header class="topbar">
+    <header class="header">
         <h1>ANJ Invoice V1</h1>
-        <p class="tagline">Smart Bill Parser + Auto Invoice Generator</p>
+        <p>Smart Bill Parser + Auto Invoice Generator</p>
     </header>
 
     <section class="container">
 
-        <div class="card upload-box">
+        <!-- Upload Section -->
+        <div class="card">
             <h2>Upload Your Bill</h2>
 
-            <input type="file" id="fileInput" accept=".pdf,image/*,.txt">
+            <input type="file" id="fileInput" />
 
             <button class="btn" onclick="processFile()">Parse Bill</button>
-
             <p class="note">Supported: PDF, JPG, PNG, TXT</p>
         </div>
 
+        <!-- Parsed Output -->
         <div id="parsedData" class="card hidden">
             <h2>Parsed Invoice Details</h2>
             <pre id="parsedOutput"></pre>
 
-            <button class="btn" onclick="generateFinalInvoice()">Generate Final Invoice</button>
+            <button class="btn" onclick="generateInvoice()">Generate Invoice (A1 • Diamond)</button>
         </div>
 
+        <!-- Final Invoice Display -->
         <div id="finalInvoice" class="card hidden">
             <h2>Generated Invoice (A1 • Diamond)</h2>
             <div id="invoiceArea"></div>
 
-            <button class="btn" onclick="window.print()">Download / Print PDF</button>
+            <button class="btn" onclick="window.print()">Download / Print Invoice</button>
         </div>
 
     </section>
@@ -55,6 +49,16 @@
         ANJ Creator Hub © 2025 • Invoice Generator V1
     </footer>
 
+    <!-- 🔥 Required Libraries (These were missing earlier) -->
+
+    <!-- PDF.js → for reading PDF bills -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+
+    <!-- Tesseract OCR → for reading images (JPG/PNG) -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
+
+    <!-- Your main JS -->
     <script src="script.js"></script>
+
 </body>
 </html>
