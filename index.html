@@ -1,103 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ANJ Invoice V3 — BlackGold Pro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANJ Invoice – AI Parser</title>
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
 
-  <!-- Libraries -->
-  <!-- pdf.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <!-- PDF libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
 
-  <!-- Tesseract (OCR) -->
-  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
-
-  <!-- html2canvas + jsPDF for PDF export -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-  <!-- Chart.js for analytics -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
-
-  <meta name="theme-color" content="#0f0f10">
+    <!-- OCR -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@v4.1.1/dist/tesseract.min.js"></script>
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="logo-geom"></div>
-      <div>
-        <h1>ANJ Invoice</h1>
-        <div class="tag">AI • History • Analytics • Black & Gold</div>
-      </div>
+
+<header class="topbar">
+    <div class="logo-block">
+        <div class="logo"></div>
+        <div>
+            <h1>ANJ Invoice</h1>
+            <p>AI • History • Analytics • Black & Gold</p>
+        </div>
     </div>
 
-    <div class="top-actions">
-      <button class="btn small gold" id="exportAllBtn">Export All (JSON)</button>
-      <button class="btn small ghost" id="clearAllBtn">Clear History</button>
+    <div class="top-buttons">
+        <button id="exportAllBtn" class="gold-btn">Export All (JSON)</button>
+        <button id="clearHistoryBtn" class="dark-btn">Clear History</button>
     </div>
-  </header>
+</header>
 
-  <main class="layout">
-    <section class="panel left">
-      <div class="card upload">
-        <h2>Upload Bill / Invoice</h2>
-        <input id="fileInput" type="file" accept="application/pdf,image/*,.txt"/>
-        <div class="hint">Supported: PDF, PNG, JPG, TXT</div>
-        <div class="actions-row">
-          <button id="parseBtn" class="btn gold">Parse Bill</button>
-          <button id="ocrBtn" class="btn ghost">OCR (image)</button>
-        </div>
-      </div>
+<section class="card">
+    <h2>Upload Bill / Invoice</h2>
+    <input type="file" id="fileInput">
 
-      <div id="parsedCard" class="card hidden">
-        <h2>Parsed Results</h2>
-        <div id="metaBlock" class="metaBlock"></div>
+    <div class="btn-row">
+        <button id="parseBtn" class="gold-btn">Parse Bill</button>
+        <button id="ocrBtn" class="dark-btn">OCR (image)</button>
+    </div>
 
-        <div id="itemsBlock" class="itemsBlock"></div>
+    <p class="supported">Supported: PDF, PNG, JPG, TXT</p>
+</section>
 
-        <div class="actions-row">
-          <button id="generateBtn" class="btn gold">Generate Invoice (A1 • BlackGold)</button>
-          <button id="saveBtn" class="btn">Save to History</button>
-        </div>
-      </div>
+<section class="card" id="outputCard" style="display:none;">
+    <h2>Extracted Information</h2>
 
-      <div id="invoiceCard" class="card hidden">
-        <h2>Generated Invoice</h2>
-        <div id="invoiceArea" class="invoiceArea"></div>
+    <div id="extractedBox" class="output-box"></div>
 
-        <div class="actions-row">
-          <button id="downloadPDFBtn" class="btn gold">Download PDF</button>
-          <button id="printBtn" class="btn">Print</button>
-          <button id="regenerateBtn" class="btn ghost">Regenerate</button>
-        </div>
-      </div>
-    </section>
+    <div class="btn-row">
+        <button id="saveBtn" class="gold-btn">Save to History</button>
+        <button id="downloadBtn" class="gold-btn">Download PDF</button>
+        <button id="printBtn" class="dark-btn">Print</button>
+    </div>
+</section>
 
-    <aside class="panel right">
-      <div class="card history">
-        <h3>History</h3>
-        <div id="historyList" class="historyList">
-          <div class="muted">No saved bills yet.</div>
-        </div>
-      </div>
+<section class="card">
+    <h2>History</h2>
+    <div id="historyList">No saved bills yet.</div>
+</section>
 
-      <div class="card analytics">
-        <h3>Analytics</h3>
-        <canvas id="categoryChart" height="200"></canvas>
-        <canvas id="monthlyChart" height="200" style="margin-top:14px;"></canvas>
-      </div>
-    </aside>
-  </main>
+<section class="card">
+    <h2>Analytics</h2>
+    <canvas id="chartCanvas"></canvas>
+</section>
 
-  <footer class="footer">
-    ANJ Creator Hub © 2025 • Invoice V3 (BlackGold Pro)
-  </footer>
+<footer>
+    ANJ Creator Hub © 2025 • Invoice V2
+</footer>
 
-  <!-- App script -->
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
-      </html>
-      
+</html>
