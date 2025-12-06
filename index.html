@@ -1,74 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANJ Invoice – AI Parser</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ANJ Invoice — Option D (Hybrid)</title>
 
-    <link rel="stylesheet" href="style.css">
+  <!-- style -->
+  <link rel="stylesheet" href="style.css">
 
-    <!-- PDF libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
+  <!-- PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
 
-    <!-- OCR -->
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@v4.1.1/dist/tesseract.min.js"></script>
+  <!-- Tesseract (OCR) -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@v4.1.1/dist/tesseract.min.js"></script>
+
+  <!-- html2canvas + jsPDF for direct PDF download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </head>
-
 <body>
-
-<header class="topbar">
-    <div class="logo-block">
-        <div class="logo"></div>
-        <div>
-            <h1>ANJ Invoice</h1>
-            <p>AI • History • Analytics • Black & Gold</p>
-        </div>
+  <header class="topbar">
+    <div class="left">
+      <div class="logo"></div>
+      <div>
+        <h1>ANJ Invoice</h1>
+        <p class="tag">Smart Bill Parser • History • Analytics • Black & Gold</p>
+      </div>
     </div>
 
-    <div class="top-buttons">
-        <button id="exportAllBtn" class="gold-btn">Export All (JSON)</button>
-        <button id="clearHistoryBtn" class="dark-btn">Clear History</button>
+    <div class="right">
+      <button id="exportAllBtn" class="btn gold">Export All (JSON)</button>
+      <button id="clearHistoryBtn" class="btn dark">Clear History</button>
     </div>
-</header>
+  </header>
 
-<section class="card">
-    <h2>Upload Bill / Invoice</h2>
-    <input type="file" id="fileInput">
+  <main>
+    <section class="card">
+      <h2>Upload Bill / Invoice</h2>
+      <input id="fileInput" type="file" accept=".pdf,image/*,text/plain" />
+      <div class="btn-row">
+        <button id="parseBtn" class="btn gold">Parse Bill</button>
+        <button id="ocrBtn" class="btn dark">OCR (image)</button>
+      </div>
+      <p class="muted">Supported: PDF, PNG, JPG, TXT — works offline (tesseract + pdf.js)</p>
+    </section>
 
-    <div class="btn-row">
-        <button id="parseBtn" class="gold-btn">Parse Bill</button>
-        <button id="ocrBtn" class="dark-btn">OCR (image)</button>
-    </div>
+    <section id="outputCard" class="card hidden">
+      <h2>Extracted Information</h2>
+      <div id="extractedBox" class="boxed"></div>
 
-    <p class="supported">Supported: PDF, PNG, JPG, TXT</p>
-</section>
+      <div class="btn-row">
+        <button id="saveBtn" class="btn gold">Save to History</button>
+        <button id="downloadBtn" class="btn gold">Download PDF</button>
+        <button id="printBtn" class="btn dark">Print</button>
+      </div>
+    </section>
 
-<section class="card" id="outputCard" style="display:none;">
-    <h2>Extracted Information</h2>
+    <section class="card">
+      <h2>History</h2>
+      <div id="historyList" class="boxed">No saved bills yet.</div>
+    </section>
 
-    <div id="extractedBox" class="output-box"></div>
+    <section class="card">
+      <h2>Analytics</h2>
+      <canvas id="chartCanvas" style="max-width:100%"></canvas>
+      <p class="muted">Summary is built from saved history (local only).</p>
+    </section>
+  </main>
 
-    <div class="btn-row">
-        <button id="saveBtn" class="gold-btn">Save to History</button>
-        <button id="downloadBtn" class="gold-btn">Download PDF</button>
-        <button id="printBtn" class="dark-btn">Print</button>
-    </div>
-</section>
+  <footer>
+    ANJ Creator Hub © 2025 • Invoice V2 (Option D)
+  </footer>
 
-<section class="card">
-    <h2>History</h2>
-    <div id="historyList">No saved bills yet.</div>
-</section>
-
-<section class="card">
-    <h2>Analytics</h2>
-    <canvas id="chartCanvas"></canvas>
-</section>
-
-<footer>
-    ANJ Creator Hub © 2025 • Invoice V2
-</footer>
-
-<script src="script.js"></script>
+  <!-- app script (must be last) -->
+  <script src="script.js"></script>
 </body>
 </html>
